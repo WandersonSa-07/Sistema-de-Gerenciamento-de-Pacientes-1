@@ -26,6 +26,6 @@ class Usuario(AbstractUser):
     USERNAME_FIELD = 'codigo'
 
     def __str__(self):
-        return self.codigo
+        return self.username
     
     objects = UsuarioManager()
