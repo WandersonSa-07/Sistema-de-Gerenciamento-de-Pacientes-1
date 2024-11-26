@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fila de Espera</title>
+</head>
+<body>
+    <h1>Fila de Espera do Dr. {{ medico.usuario.username }}</h1>
+
+    <ul>
+        {% for entry in fila %}
+            <li>
+                Paciente: {{ entry.paciente.usuario.username }} 
+                | Chegada: {{ entry.created_at }}
+                
+            </li>
+        {% empty %}
+            <li>Nenhum paciente na fila</li>
+        {% endfor %}
+    </ul>
+
+    
+</body>
+</html>

@@ -7,3 +7,4 @@ from .medico import Medico
 from .paciente import Paciente
 from .consulta import Consulta
 from .receita_medica import ReceitaMedica
+from .fila_espera import FilaEspera
