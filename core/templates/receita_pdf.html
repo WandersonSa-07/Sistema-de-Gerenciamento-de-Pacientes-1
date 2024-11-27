@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receita Médica</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+        .header p {
+            font-size: 16px;
+            margin: 0;
+        }
+        .content {
+            margin-top: 20px;
+        }
+        .content p {
+            font-size: 14px;
+        }
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 12px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Receita Médica</h1>
+        <p><strong>Data:</strong> {{ receita.date|date:"d/m/Y H:i" }}</p>
+    </div>
+    <div class="content">
+        <h2>Medicamentos:</h2>
+        <p>{{ prescription.medication }}</p>
+        <h2>Instruções:</h2>
+        <p>{{ receita.instructions }}</p>
+    </div>
+</body>
+</html>
