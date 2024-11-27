@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Atendente{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/atendenteHome.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<div class="cards">
+    <h1>Atendente: {{ request.user.first_name|default:"Nome não informado" }}</h1>
+    <div class="services">
+        <div class="content content-1">
+            <div class="fa fa-id-badge"></div>
+            <h2>Atendente</h2>
+            <a href="{% url 'atendente' %}">Acessar</a>
+        </div>
+        <div class="content content-1">
+            <div class="fa fa-stethoscope"></div>
+            <h2>Médico</h2>
+            <a href="{% url 'atendente_medico' %}">Acessar</a>
+        </div>
+        <div class="content content-1">
+            <div class="fa fa-users"></div>
+            <h2>Paciente</h2>
+            <a href="{% url 'atendente_paciente' %}">Acessar</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Atendente{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/atendente.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+<section>
+    <div class="row">
+        <h2 class="section-heading">Atendente</h2>
+    </div>
+    <div class="row">
+        <div class="column">
+            <div class="card">
+                <div class="icon-wrapper">
+                    <i class="fa fa-edit"></i>
+                </div>
+                <a href="{% url 'cadastro_atendente' %}"><h3>Cadastrar Atendente</h3></a>
+                <p>Cadastro de novas atendentes no Sistema</p>
+            </div>
+        </div>
+        <div class="column">
+            <div class="card">
+                <div class="icon-wrapper">
+                    <i class="fa fa-file"></i>
+                </div>
+                <a href="#"><h3>Relatório</h3></a>
+                <p>Visualizar relatórios sobre os médicos</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+

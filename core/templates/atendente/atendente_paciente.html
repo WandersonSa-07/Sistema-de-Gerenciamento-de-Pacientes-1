@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Atendente{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/atendente.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+<section>
+    <div class="row">
+        <h2 class="section-heading">Pacientes</h2>
+    </div>
+    <div class="row">
+        <div class="column">
+            <div class="card">
+                <div class="icon-wrapper">
+                    <i class="fa fa-user"></i>
+                </div>
+                <a href="{% url 'cadastro_paciente' %}"><h3>Cadastro Paciente</h3></a>
+                <p>Lorem ipsum dolor sit amet, consecteturepellat qui ex eveniet vel.</p>
+            </div>
+        </div>
+        <div class="column">
+            <div class="card">
+                <div class="icon-wrapper">
+                    <i class="fa fa-user"></i>
+                </div>
+                <a href="#"><h3>Service Heading</h3></a>
+                <p>Lorem ipsum dolor sit amet, consecteturepellat qui ex eveniet vel.</p>
+            </div>
+        </div>
+        <div class="column">
+            <div class="card">
+                <div class="icon-wrapper">
+                    <i class="fa fa-user"></i>
+                </div>
+                <a href="#"><h3>Service Heading</h3></a>
+                <p>Lorem ipsum dolor sit amet, consecteturepellat qui ex eveniet vel.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+

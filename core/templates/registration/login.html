@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %} Login {% endblock %}
+{% block content %}
+    <form class="form-signin" method="post" autocomplete="off">
+        {% csrf_token %}
+        <h1 class="h3 mb-3 font-weight-normal">Login</h1>
+        <label for="username" class="sr-only">Código</label>
+        <input type="text" id="username" name="username" class="form-control" placeholder="Informe CPF/CRM/ID">
+
+        <label for="password" class="sr-only">Senha</label>
+        <input type="password" id="password" name="password" class="form-control" placeholder="Infrome sua senha">
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Acessar</button>
+    </form>
+{% endblock %}
