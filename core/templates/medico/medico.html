@@ -1,10 +1,40 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}Médico{% endblock %}
+{% block title %}Atendente{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/atendente.css' %}">
+{% endblock %}
 
 
 {% block content %}
-<h1>Página principal do Médico</h1>
+
+<section>
+    <div class="row">
+        <h2 class="section-heading">Médicos</h2>
+    </div>
+    <div class="row">
+        <div class="column">
+            <div class="card">
+                <div class="icon-wrapper">
+                    <i class="fa fa-edit"></i>
+                </div>
+                <a href="{% url 'fila_espera_medico' %}"><h3>Chamar paciente</h3></a>
+                <p>Chamar um paciente na fila de espera</p>
+            </div>
+        </div>
+        <div class="column">
+            <div class="card">
+                <div class="icon-wrapper">
+                    <i class="fa fa-plus-square"></i>
+                </div>
+                <a href="{% url 'medico_consulta' %}"><h3>Realizar consulta</h3></a>
+                <p>Realiza a consulta com o paciente</p>
+            </div>
+        </div>
+    </div>
+</section>
+
 {% endblock %}
 

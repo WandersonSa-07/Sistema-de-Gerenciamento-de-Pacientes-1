@@ -24,5 +24,6 @@ urlpatterns = [
     path('', include('core.urls.homeUrls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('registro/', include('core.urls.pacienteUrls')),
-    path('atendente/',include('core.urls.atendenteUrls'))
+    path('atendente/',include('core.urls.atendenteUrls')),
+    path('medico/',include('core.urls.medicoUrls'))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from core.forms.registroForm import AtendenteForm, UsuarioAtendente, EspecialidadeForm
+from core.forms.registroForm import AtendenteForm, UsuarioAtendente, EspecialidadeForm, FilaEsperaForm
+from core.models import FilaEspera, Medico, Paciente
 
 def atendenteView(request):
         return render(request, template_name='atendente/atendente.html')
@@ -59,3 +60,32 @@ def cadastro_especialidadeView(request):
    }
 
    return render(request,'atendente/cadastro_especialidade.html', context=context)
+
+def mostrar_fila_espera(request):
+   if str(request.method) == 'POST':
+      fila_espera_form = FilaEsperaForm(request.POST)
+      
+      if fila_espera_form.is_valid():
+         fila_espera = fila_espera_form.save(commit=False)
+         fila_espera.save()
+
+         messages.success(request, 'Inserido na fila.')
+         return redirect('atendente_fila_espera')
+      else:
+         messages.error(request, 'Erro ao inserir na fila de espera.')
+  
+   else:
+      fila_espera_form = FilaEsperaForm()
+   medicos = Medico.objects.all()
+   contexto = []
+   for medico in medicos:
+      fila = FilaEspera.objects.filter(medico=medico, estado="Waiting").order_by("created_at")
+      contexto.append({"medico": medico, "fila": fila})
+   return render(request, 'atendente/filaEspera.html', {'contexto': contexto, 'fila_espera_form':fila_espera_form}) 
+
+
+def inserir_paciente(request):
+   medico = get_object_or_404(Medico, id=1)
+   paciente = get_object_or_404(Paciente, id=1)
+    
+   FilaEspera.objects.create(medico=medico, paciente=paciente)

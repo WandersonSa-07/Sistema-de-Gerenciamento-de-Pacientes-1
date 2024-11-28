@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fila de Espera</title>
+</head>
+<body>
+    <h1>Adicionar paciente à fila</h1>
+<form action="." method="POST">
+    {% csrf_token %}
+    {{ fila_espera_form.as_p }}
+    <button type="submit">Salvar</button>
+
+</form>
+    {% for item in contexto %}
+    <h2>Médico: {{ item.medico.usuario.username }}</h2>
+    <ul>
+        {% for fila in item.fila %}
+            <li>
+                Paciente: {{ fila.paciente.usuario.username }}
+                (Criado em: {{ fila.created_at }})
+            </li>
+        {% empty %}
+            <li>Não há pacientes na fila.</li>
+        {% endfor %}
+    </ul>
+{% endfor %}
+</body>
+</html>

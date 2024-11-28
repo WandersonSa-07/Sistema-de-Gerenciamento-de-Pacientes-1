@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fila de Espera do Médico</title>
+</head>
+<body>
+    <h1>Pacientes na Fila de Espera</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Paciente</th>
+                <th>Estado</th>
+                <th>Horário</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in fila %}
+                <tr>
+                    <td>{{ item.paciente.usuario.username}}</td>
+                    <td>{{ item.estado }}</td>
+                    <td>{{ item.created_at }}</td>
+                    <td>
+                        <form method="post" action="{% url 'chamar_paciente' item.id %}">
+                            {% csrf_token %}
+                            <button type="submit">Chamar</button>
+                        </form>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="3">Nenhum paciente na fila.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
