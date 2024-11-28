@@ -10,7 +10,7 @@
 
 {% block content %}
 <div class="cards">
-    <h1>Atendente: {{ request.user.first_name|default:"Nome não informado" }}</h1>
+    <h1>Atendente: {{ request.user.first_name|default:"Nome não informado" }} {{ request.user.last_name|default:"Nome não informado" }}</h1>
     <div class="services">
         <div class="content content-1">
             <div class="fa fa-id-badge"></div>

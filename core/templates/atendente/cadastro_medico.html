@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Cadastro - Médico {% endblock %}
+
+{% block content %}
+
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+
+<h1>Cadastro - Médico</h1>
+<form action="." method="POST">
+    {% csrf_token %}
+    {{ usuario_form.as_p }}
+    {{ medico_form.as_p }}
+
+    <button type="submit">Salvar</button>
+
+</form>
+{% endblock %}
