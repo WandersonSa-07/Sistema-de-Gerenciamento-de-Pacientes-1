@@ -14,13 +14,17 @@
 {% endif %}
 
 
-<h1>Cadastro - Atendente</h1>
-<form action="." method="POST">
+<h1 class="text-center">Cadastro - Atendente</h1>
+<form action="." method="POST" class="container">
     {% csrf_token %}
-    {{ usuario_form.as_p }}
-    {{ atendente_form.as_p }}
+    <div class="mb-3">
+        {{ usuario_form.as_p }}
+    </div>
+    <div class="mb-3">
+        {{ atendente_form.as_p }}
+    </div>
 
-    <button type="submit">Salvar</button>
+    <button type="submit" class="btn btn-primary">Salvar</button>
 
 </form>
 {% endblock %}

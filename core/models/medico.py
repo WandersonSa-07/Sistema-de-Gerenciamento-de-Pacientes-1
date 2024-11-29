@@ -5,4 +5,4 @@ class Medico(models.Model):
     especialidade = models.ForeignKey(Especialidade, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.usuario.codigo
+        return self.usuario.first_name + " " + self.usuario.last_name

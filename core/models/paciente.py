@@ -13,4 +13,4 @@ class Paciente(models.Model):
      sexo = models.CharField(max_length=20, choices=SEXO)
 
      def __str__(self):
-          return self.usuario.username
+          return self.usuario.first_name + " " + self.usuario.last_name 

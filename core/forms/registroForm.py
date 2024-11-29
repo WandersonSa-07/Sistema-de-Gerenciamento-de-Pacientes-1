@@ -16,6 +16,11 @@ class UsuarioForm(UserCreationForm):
         model = Usuario
         fields = ['codigo','password1', 'password2','email','first_name','last_name', 'telefone']
 
+class UsuarioPaciente(UsuarioForm):
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            self.fields['codigo'].label = 'CPF'
+
 
 class AtendenteForm(forms.ModelForm):
     class Meta:
@@ -24,6 +29,10 @@ class AtendenteForm(forms.ModelForm):
         exclude = ('usuario',)
 
 class UsuarioAtendente(UsuarioForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['codigo'].label = 'ID'
+
     def save(self, commit=True):
         usuario = super().save(commit=False)
         usuario.tipo = 'atendente'
@@ -38,6 +47,10 @@ class MedicoForm(forms.ModelForm):
         exclude = ('usuario',)
 
 class UsuarioMedico(UsuarioForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['codigo'].label = 'CRM'
+
     def save(self, commit=True):
         usuario = super().save(commit=False)
         usuario.tipo = 'medico'

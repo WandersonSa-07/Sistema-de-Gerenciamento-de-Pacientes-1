@@ -40,5 +40,5 @@ def remover_paciente(request, fila_id):
 
 def gerenciar_paciente(request):
    fila = FilaEspera.objects.filter(medico_id=1, estado="Waiting").order_by("created_at")
-   return render(request, 'medico/fila_espera.html', {'fila': fila})  
+   return render(request, 'medico/medico_consulta.html')  
    
