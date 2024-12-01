@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Cadastro{% endblock %}
+
+{% block content %}
+
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+
+<h1>Consulta</h1>
+<form action="." method="POST">
+
+    {% csrf_token %}
+    {{ funcionalidades_consulta.as_p }}
+
+    <button type="submit">Salvar</button>
+
+</form>
+{% endblock %}
+

@@ -6,6 +6,7 @@ class FilaEspera(models.Model):
 
     ESTADO = (
           ("Waiting", "Em espera"),
+          ("Being_Attended_to", "Em atendimento"),
           ("Attended", "Atendido"),
           ("Cancelled", "Cancelado")
      )

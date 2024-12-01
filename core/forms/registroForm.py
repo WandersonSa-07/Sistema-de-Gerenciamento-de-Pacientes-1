@@ -70,5 +70,23 @@ class FilaEsperaForm(forms.ModelForm):
         widgets = {
             'medico': forms.Select(attrs={'class': 'form-control'}),
             'paciente': forms.Select(attrs={'class': 'form-control'}),
-            'estado': forms.Select(choices=[('Waiting', 'Em espera'), ('Attended', 'Atendido'), ('Cancelled', 'Cancelado')], attrs={'class': 'form-control'}),
+            'estado': forms.Select(choices=[('Waiting', 'Em espera'), ('Cancelled', 'Cancelado')], attrs={'class': 'form-control'}),
         }
+    
+
+class Funcionalidades_de_ConsultaForm(forms.Form):
+    HORARIO = (
+          ("1", "07:00 - 07:30"),
+          ("2", "07:30 - 08:00"),
+          ("3", "08:00 - 08:30")
+     )
+    
+    horario = forms.ChoiceField(choices=HORARIO)
+    data = forms.DateField()
+    
+    sintomas_apresentados = forms.CharField(max_length=500)
+
+    remedio = forms.CharField(max_length=50)
+    dosagem = forms.CharField(max_length=10)
+    qtd_de_dias = forms.CharField(max_length=10)
+    qtd_por_dia = forms.CharField(max_length=10)
