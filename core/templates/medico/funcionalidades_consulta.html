@@ -15,6 +15,12 @@
 
 
 <h1>Consulta</h1>
+<div class="card-body">
+    <p><strong>Paciente:</strong> {{ ficha_medica.paciente.usuario.first_name }} {{ficha_medica.paciente.usuario.last_name}}</p> 
+    <p><strong>Alergias:</strong> {{ ficha_medica.alergias }}</p>  <!-- Exibe as alergias do paciente -->
+    <p><strong>Medicamentos em uso:</strong> {{ ficha_medica.medicamentos_em_uso }}</p>  <!-- Exibe o nome dos medicamentos que ele toma -->
+    <p><strong>Observações:</strong> {{ ficha_medica.observacoes }}</p>
+</div>
 <form action="." method="POST">
 
     {% csrf_token %}
@@ -23,5 +29,6 @@
     <button type="submit">Salvar</button>
 
 </form>
+
 {% endblock %}
 

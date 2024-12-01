@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from core.forms.registroForm import AtendenteForm, UsuarioAtendente, EspecialidadeForm, FilaEsperaForm, PacienteForm, UsuarioPaciente
-from core.models import FilaEspera, Medico, Paciente
+from core.models import FilaEspera, Medico, Paciente, Consulta
 
 def atendenteView(request):
         return render(request, template_name='atendente/atendente.html')
@@ -117,3 +117,31 @@ def cadastro_pacienteView(request):
     }
 
     return render(request, 'registro.html', context=context)
+
+def ver_relatorio(request):
+    medicos = Medico.objects.all()
+    medicos_dados = []
+
+    for medico in medicos:
+        consultas = Consulta.objects.filter(medico=medico)  # Consultas do médico
+        pacientes_na_fila = FilaEspera.objects.filter(medico=medico)  # Pacientes na fila de espera
+
+        # Agora, mapear as consultas e a fila de espera
+        consultas_e_fila = []
+        for consulta in consultas:
+            paciente_na_fila = pacientes_na_fila.filter(paciente=consulta.paciente).first()  # Verifica se o paciente está na fila de espera
+            consultas_e_fila.append({
+                'consulta': consulta,
+                'updated_at_fila': paciente_na_fila.horario_chamado if paciente_na_fila else None  # Se o paciente estiver na fila, pega o updated_at
+            })
+
+        # Adiciona o médico com as consultas e a fila de espera
+        medicos_dados.append({
+            'medico': medico,
+            'consultas_e_fila': consultas_e_fila
+        })
+
+    return render(request, 'atendente/medicos_com_consultas_e_fila.html', {
+        'medicos_com_dados': medicos_dados,
+    })
+    

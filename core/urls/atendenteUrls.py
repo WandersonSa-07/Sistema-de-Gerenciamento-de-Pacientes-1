@@ -10,5 +10,6 @@ urlpatterns = [
     path("medico/cadastroMedico/", cadastro_MedicoView, name='cadastro_medico'),
     path("paciente/cadastroPaciente/",cadastro_pacienteView, name='cadastro_paciente'),
     path("medico/cadastroEspecialidade/", cadastro_especialidadeView, name='cadastro_especialidade'),
-    path("filaEspera/", mostrar_fila_espera, name='atendente_fila_espera')
+    path("filaEspera/", mostrar_fila_espera, name='atendente_fila_espera'),
+    path("relatorio", ver_relatorio, name='relatorio')
 ]

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Médicos, Consultas e Fila de Espera</title>
+</head>
+<body>
+    <h1>Médicos, Consultas e Fila de Espera</h1>
+
+    {% for medico_dados in medicos_com_dados %}
+        <h2>Dr. {{ medico_dados.medico.usuario.last_name }} - Especialidade: {{ medico_dados.medico.especialidade }}</h2>
+
+        <h3>Consultas:</h3>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Paciente</th>
+                    <th>Data marcada</th>
+                    <th>Horário marcado</th>
+                    <th>Horário do atendimento</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in medico_dados.consultas_e_fila %}
+                    <tr>
+                        <td>{{ item.consulta.paciente.usuario.first_name }} {{ item.consulta.paciente.usuario.last_name }}</td>  <!-- Nome do paciente -->
+                        <td>{{ item.consulta.data }}</td>  <!-- Formata a data -->
+                        <td>{{ item.consulta.horario }}</td>  <!-- Formata o horário -->
+                        <td>
+                            {% if item.updated_at_fila %}
+                                {{ item.updated_at_fila|date:"d/m/Y H:i" }}
+                            {% else %}
+                                Nenhuma atualização
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="5">Este médico não tem consultas registradas.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% empty %}
+        <p>Nenhum médico encontrado.</p>
+    {% endfor %}
+
+    <a href="{% url 'home' %}">Voltar para a página inicial</a>
+</body>
+</html>

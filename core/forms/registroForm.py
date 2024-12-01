@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from core.models import Paciente, Usuario, Atendente, Medico, Especialidade, FilaEspera
+from core.models import Paciente, Usuario, Atendente, Medico, Especialidade, FilaEspera, FichaMedica
 
 class PacienteForm(forms.ModelForm):
     class Meta:
@@ -73,12 +73,24 @@ class FilaEsperaForm(forms.ModelForm):
             'estado': forms.Select(choices=[('Waiting', 'Em espera'), ('Cancelled', 'Cancelado')], attrs={'class': 'form-control'}),
         }
     
+class FichaMedicaForm(forms.Form):
+    especialidade = forms.ModelChoiceField(
+        queryset=Especialidade.objects.all(),  # Obtém todas as especialidades do banco
+        label='Especialidade',
+        empty_label="Selecione uma especialidade",  # Texto que aparece quando nenhum item está selecionado
+        required=True  # Torna o campo obrigatório
+    )
+    alergias = forms.CharField(max_length=100, required=False)
+    medicamentos_em_uso = forms.CharField(max_length=50, required=False)
+    observacoes = forms.CharField(max_length=500, required=False)
+    
 
-class Funcionalidades_de_ConsultaForm(forms.Form):
+
+class Funcionalidades_de_ConsultaForm(forms.Form):  
     HORARIO = (
-          ("1", "07:00 - 07:30"),
-          ("2", "07:30 - 08:00"),
-          ("3", "08:00 - 08:30")
+          ("07:30 - 08:00", "07:00 - 07:30"),
+          ("07:30 - 08:00", "07:30 - 08:00"),
+          ("08:00 - 08:30", "08:00 - 08:30")
      )
     
     horario = forms.ChoiceField(choices=HORARIO)

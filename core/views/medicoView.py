@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from core.forms.registroForm import MedicoForm, UsuarioMedico, Funcionalidades_de_ConsultaForm
-from core.models import FilaEspera, Medico, Paciente, Consulta, ReceitaMedica
+from core.models import FilaEspera, Medico, Paciente, Consulta, ReceitaMedica, FichaMedica
 from django.http import HttpResponse
 
 def cadastro_MedicoView(request):
@@ -34,21 +34,27 @@ def cadastro_MedicoView(request):
 
 
 def remover_paciente(request, fila_id):
-   if not FilaEspera.objects.filter(medico_id=1, estado="Being_Attended_to").exists():
+   medico=request.user.medico
+   if not FilaEspera.objects.filter(medico=medico, estado="Being_Attended_to").exists():
       fila = get_object_or_404(FilaEspera, id=fila_id, estado="Waiting")
       fila.estado = "Being_Attended_to"
       fila.save()
    return redirect('fila_espera_medico')
 
 def gerenciar_paciente(request):
-   fila = FilaEspera.objects.filter(medico_id=1, estado="Waiting").order_by("created_at")
+   medico=request.user.medico
+   fila = FilaEspera.objects.filter(medico=medico, estado="Waiting").order_by("created_at")
    return render(request, 'medico/fila_espera.html', {'fila': fila})
 
 def realizar_consulta(request):
-   medico = Medico.objects.filter(usuario_id=1).first()
-   paciente =  FilaEspera.objects.filter(estado="Being_Attended_to").first().paciente
-   if not paciente:
-      return HttpResponse("Não há pacientes em atendimento no momento.")
+   medico=request.user.medico
+   fila =  FilaEspera.objects.filter(estado="Being_Attended_to").first()
+
+   if (fila==None):
+      messages.warning(request, "Nenhum paciente encontrado.")
+      return redirect("home")
+   
+   paciente = fila.paciente
    if str(request.method) == 'POST':
       funcionalidades_consulta = Funcionalidades_de_ConsultaForm(request.POST)
       
@@ -83,20 +89,23 @@ def realizar_consulta(request):
 
 
             # Alterar estado do Paciente
-         paciente.estado = "Attended"
-         paciente.save()
+         fila.estado = "Attended"
+         #fila.horario_chamado = data
+         fila.save()
          
          
-         return redirect('cadastro_medico')
+         return redirect('home')
       else:
          messages.error(request, 'Erro ao realizar o cadastro.')
   
    else:
       funcionalidades_consulta = Funcionalidades_de_ConsultaForm()
-      
+
+   ficha_medica =  FichaMedica.objects.filter(paciente=paciente).first()
 
    context = {
-      'funcionalidades_consulta': funcionalidades_consulta
+      'funcionalidades_consulta': funcionalidades_consulta,
+      'ficha_medica': ficha_medica
    }
 
    return render(request,'medico/funcionalidades_consulta.html', context=context)
