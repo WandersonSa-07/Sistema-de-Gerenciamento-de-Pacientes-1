@@ -3,6 +3,7 @@ from core.models import *
 class FilaEspera(models.Model):
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
     medico = models.ForeignKey(Medico, on_delete=models.CASCADE)
+    consulta = models.OneToOneField(Consulta, on_delete=models.CASCADE)
 
     ESTADO = (
           ("Waiting", "Em espera"),
@@ -12,7 +13,7 @@ class FilaEspera(models.Model):
      )
     estado = models.CharField(max_length=20, choices=ESTADO, default="Waiting")# quando salvar vai estar sempre definido como em espera
 
-    horario_chamado = models.DateTimeField()
+    horario_chamado = models.DateTimeField(null=True,blank=True)
 
 
     created_at = models.DateTimeField(auto_now_add=True) #Quando criar a fila, adciona a data ao qual foi criado. Para sabermos quem chegou primeiro

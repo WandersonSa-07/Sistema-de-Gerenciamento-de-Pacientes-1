@@ -1,0 +1,17 @@
+<h1>Marcar Consulta</h1>
+<form method="post">
+    {% csrf_token %}
+
+    <label for="horario">Escolha Médico e Horário:</label>
+    <select id="horario" name="horario" required>
+        <option value="">-- Selecione --</option>
+        {% for horario in horarios_disponiveis %}
+            <option value="{{ horario.id }}">
+                {{ horario.medico.usuario.get_full_name }} - {{ horario.medico.especialidade.nome }} - {{ horario.data_horario }}
+            </option>
+        {% endfor %}
+    </select>
+    <br><br>
+
+    <button type="submit">Marcar Consulta</button>
+</form>

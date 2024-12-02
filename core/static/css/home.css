@@ -1,3 +1,510 @@
-body{
-    background-color:rgb(255, 255, 255);
+/* Estilo geral */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    color: #333;
+  }
+  
+  /* Logo no cabeçalho */
+  header img.logo {
+    height: 60px; /* Ajuste o tamanho conforme necessário */
+    width: auto;
+  }
+  
+  /* Cabeçalho */
+  header {
+    background: white;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  header nav {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  /* Estilo dos links de navegação no cabeçalho */
+  header nav a {
+    color: #1e90ff; /* Azul para as opções */
+    text-decoration: none; 
+    margin: 0 10px;
+    font-weight: bold; 
+    transition: color 0.3s ease; /* Transição suave para a cor ao passar o mouse */
+  }
+  
+  /* Alteração da cor ao passar o mouse */
+  header nav a:hover {
+    color: #87ceeb; 
+  }
+  
+  header h1 {
+    flex: 1;
+    margin: 0;
+  }
+  
+  /* Seção Hero */
+  .hero {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: white;
+  }
+  
+  /* Contêiner das Cartões de Acesso */
+  .access-cards {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-top: auto
+  }
+  
+/* Estilo de Cada Cartão */
+.card {
+    background: #1e90ff;
+    color: white;
+    border-top-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.575);
+    text-align: center;
+    padding: 10px 10px;
+    width: 250px;
+    display: flex;
+    flex-direction: column; /* Organiza os elementos do cartão de cima para baixo */
+    justify-content: space-between; /* Espaça os itens uniformemente dentro do cartão */
+    height: 200px; /* Ajuste a altura do card, se necessário */
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.575);
+  }
+  
+  /* Ícone do Cartão */
+  .card img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: auto; /* Espaçamento entre o ícone e o texto */
+    margin-top: auto;
+    align-self: center; /* Centraliza o ícone horizontalmente */
+  }
+  
+  /* Botão de Acesso */
+  .access-btn {
+    display: inline-block;
+    margin-top: auto; /* Espaçamento entre o conteúdo e o botão */
+    padding: 10px 20px;
+    background: #87ceeb;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 30px;
+    transition: background 0.3s ease, transform 0.2s ease;
+    align-self: center; /* Garante que o botão de acesso fique centralizado */
+  }
+  
+  .access-btn:hover {
+    background: #00bfff;
+    transform: scale(1.05); /* Aumenta o tamanho do botão ligeiramente */
+  }
+  
+/* Estilo para a seção Sobre */
+.sobre {
+  background-color: #4CAF50; /* Fundo verde */
+  color: white; /* Texto em branco */
+  padding: 50px 20px; /* Aumentado o espaçamento interno */
+  text-align: center; /* Centraliza o texto */
 }
+
+.sobre-1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Espaçamento uniforme */
+  gap: 20px; /* Espaçamento entre texto e imagem */
+  flex-wrap: wrap; /* Permite quebrar para telas menores */
+  max-width: 1200px; /* Limita a largura da seção */
+  margin: 0 auto; /* Centraliza o conteúdo */
+}
+
+.texto-1 {
+  flex: 1; /* Distribui o espaço entre texto e imagem */
+  text-align: justify; /* Justifica o texto */
+  font-size: 18px; /* Tamanho maior para leitura */
+  line-height: 1.8; /* Aumenta o espaçamento entre linhas */
+}
+
+.imagem-1 img {
+  width: 100%; /* Garante que a imagem ocupe todo o espaço disponível */
+    max-width: 400px; /* Limita o tamanho máximo da imagem */
+    height: auto; /* Mantém a proporção da imagem */
+    border-top-left-radius: 50px; /* Borda superior esquerda arredondada */
+    border-bottom-right-radius: 50px; /* Borda inferior direita arredondada */
+    border-top-right-radius: 0px; /* Outras bordas sem arredondar */
+    border-bottom-left-radius: 0px;
+    box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.521); /* Sombra para destacar */
+    object-fit: cover; /* Garante que a imagem preencha o espaço sem distorcer */
+    display: block; /* Evita espaços adicionais */
+    margin: 0 auto; /* Centraliza a imagem */
+}
+
+/* Estilo para a seção Sobre2 */
+.sobre2 {
+  background-color: #3e8c47; /* Verde mais escuro */
+  color: white;
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.sobre-2 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.texto-2 {
+  flex: 1;
+  text-align: justify;
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+/* Lista de tópicos */
+.topicos {
+  list-style: none; /* Remove os marcadores padrão */
+  padding: 30px; /* Remove padding */
+  margin: 0; /* Remove margem */
+  display: flex;
+  flex-direction: column; /* Organiza os itens em coluna */
+  gap: 20px; /* Espaçamento entre os tópicos */
+}
+
+/* Cada item de tópico */
+.topicos li {
+  display: flex;
+  align-items: center; /* Alinha o texto com o ícone verticalmente */
+  gap: 20px; /* Espaçamento entre o ícone e o texto */
+}
+
+/* Ícones nos tópicos */
+.topicos li img {
+  width: 50px; /* Define o tamanho do ícone */
+  height: 50px; /* Garante proporção uniforme */
+  border-radius: 50%; /* Ícone com bordas arredondadas (opcional) */
+  object-fit: cover; /* Ajusta a imagem dentro do tamanho definido */
+}
+
+/* Texto dos tópicos */
+.topicos li p {
+  margin: 0; /* Remove margens do parágrafo */
+  color: white; /* Cor branca para contraste */
+  font-size: 18px; /* Tamanho da fonte */
+  font-weight: 500; /* Peso da fonte */
+  line-height: 1.5; /* Altura das linhas */
+}
+
+  /* Botão de Acesso topico */
+  .access-topico {
+    display: inline-block;
+    margin-top: auto; /* Espaçamento entre o conteúdo e o botão */
+    padding: 10px 20px;
+    background: #87ceeb;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 30px;
+    transition: background 0.3s ease, transform 0.2s ease;
+    align-self: center; /* Garante que o botão de acesso fique centralizado */
+  }
+  
+  .access-topico:hover {
+    background: #00bfff;
+    transform: scale(1.05); /* Aumenta o tamanho do botão ligeiramente */
+  }
+
+
+.imagem-2 img {
+  width: 100%; /* Garante que a imagem ocupe todo o espaço disponível */
+    max-width: 400px; /* Limita o tamanho máximo da imagem */
+    height: auto; /* Mantém a proporção da imagem */
+    border-top-left-radius: 50px; /* Borda superior esquerda arredondada */
+    border-bottom-right-radius: 50px; /* Borda inferior direita arredondada */
+    border-top-right-radius: 0px; /* Outras bordas sem arredondar */
+    border-bottom-left-radius: 0px;
+    box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.521); /* Sombra para destacar */
+    object-fit: cover; /* Garante que a imagem preencha o espaço sem distorcer */
+    display: block; /* Evita espaços adicionais */
+    margin: 0 auto; /* Centraliza a imagem */
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .sobre-1, .sobre-2, .especialidades {
+      flex-direction: column; /* Empilha os itens em coluna */
+      text-align: center; /* Centraliza em telas menores */
+  }
+
+  .texto-1, .texto-2, .especialidades-lista {
+      max-width: 90%; /* Ajusta o texto para telas menores */
+      margin: 0 auto; /* Centraliza o texto */
+  }
+
+  .imagem-1 img, .imagem-2 img, .especialidade-imagem {
+      margin: 20px 0; /* Espaçamento entre imagem e texto */
+  }
+}
+
+/* Estilo da seção Especialidades */
+.especialidades {
+  padding: 50px 20px;
+  background-color: #f4f4f4; /* Cor de fundo suave */
+  text-align: center
+  
+}
+
+/* Container da seção Especialidades */
+.especialidades-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Estilo da imagem à esquerda */
+.especialidade-imagem img {
+  width: 100%; /* Garante que a imagem ocupe todo o espaço disponível */
+    max-width: 400px; /* Limita o tamanho máximo da imagem */
+    height: auto; /* Mantém a proporção da imagem */
+    border-top-left-radius: 50px; /* Borda superior esquerda arredondada */
+    border-bottom-right-radius: 50px; /* Borda inferior direita arredondada */
+    border-top-right-radius: 0px; /* Outras bordas sem arredondar */
+    border-bottom-left-radius: 0px;
+    box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.521); /* Sombra para destacar */
+    object-fit: cover; /* Garante que a imagem preencha o espaço sem distorcer */
+    display: block; /* Evita espaços adicionais */
+    margin: 0 auto; /* Centraliza a imagem */
+}
+
+/* Lista de cartões de especialidades */
+.especialidades-lista {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 colunas */
+  gap: 20px;
+  align-items: center;
+  justify-items: center;
+  max-width: 500px; /* Limita o tamanho máximo da lista */
+  margin: 0 auto;
+}
+
+/* Estilo de cada cartão de especialidade */
+.especialidade-card {
+  background-color: #1e90ff;
+  color: white;
+  padding: 10px;
+  border-radius: 20px; /* Bordas arredondadas */
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+  cursor: default;
+  width: 200px; /* Define a largura fixa */
+  height: 20px; /* Define a altura fixa */
+  display: flex; /* Garante alinhamento interno */
+  justify-content: center; /* Centraliza o conteúdo horizontalmente */
+  align-items: center; /* Centraliza o conteúdo verticalmente */
+}
+
+/* Efeito ao passar o mouse */
+.especialidade-card:hover {
+  transform: scale(1.05); /* Aumenta o tamanho ao passar o mouse */
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+
+/* Estilo para a seção Convenios */
+.convenio {
+  padding: 50px 20px; /* Espaçamento interno */
+  background-color: #f4f4f4; /* Cor de fundo suave */
+  text-align: center; /* Centraliza o texto dentro da seção */
+}
+
+/* Container da seção Convênio */
+.covenio-1 {
+  display: flex; /* Configura o layout como flexbox */
+  justify-content: center; /* Centraliza os itens horizontalmente */
+  align-items: flex-start; /* Alinha os itens ao topo */
+  gap: 20px; /* Espaçamento entre os cartões */
+  flex-wrap: wrap; /* Permite quebra de linha em telas menores */
+  max-width: 1200px; /* Limita a largura máxima */
+  margin: 0 auto; /* Centraliza o contêiner na página */
+}
+
+/* Estilo do Cartão Convênio */
+.convenio-card {
+  background: #3e8c47;
+  color: white;
+  border-top-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.575);
+  text-align: center;
+  padding: 20px;
+  width: 100%; /* Ocupa toda a largura do contêiner */
+  max-width: 350px; /* Limita a largura máxima */
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin: 0 auto; /* Centraliza o cartão */
+}
+
+/* Hover no Cartão */
+.convenio-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.575);
+}
+
+/* Ícone do Cartão */
+.convenio-card img {
+  width: 50px;
+  height: 50px;
+  margin: 20px 0; /* Espaçamento em relação ao texto */
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Botão de Acesso */
+.convenio-btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: #87ceeb;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 30px;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.convenio-btn:hover {
+  background: #00bfff;
+  transform: scale(1.05); /* Aumenta o tamanho do botão ligeiramente */
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+  .covenio-1 {
+    flex-direction: column; /* Empilha os cartões em coluna em telas pequenas */
+    align-items: center; /* Centraliza os itens */
+  }
+
+  .convenio-card {
+    max-width: 90%; /* Ocupa quase toda a largura disponível */
+  }
+}
+
+
+  /* Estilo do Footer */
+.footer {
+  background-color: #e8fff1; /* Fundo verde claro */
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.footer-logo-info {
+  flex: 1;
+  text-align: left;
+}
+
+.footer-logo {
+  width: 80px; /* Ajuste o tamanho do logo */
+  margin-bottom: 10px;
+}
+
+.footer-contact {
+  flex: 1;
+  text-align: center;
+}
+
+.footer-contact img {
+  max-width: 3%; /* Ajuste o valor conforme necessário */
+  height: auto;   /* Mantém a proporção original da imagem */
+  margin:  auto; /* Centraliza a imagem, se necessário */
+  display:inline-flex;
+  width: 150px; /* Ajuste conforme o tamanho desejado */
+  object-fit: cover; /* Ajusta a imagem para preencher o espaço sem distorcer */
+}
+
+
+.footer-contact p {
+  margin: 5px 0;
+  display:flex;
+  align-items: center;
+  gap: 0px; /* Espaço entre ícone e texto */
+}
+
+.footer-social {
+  flex: 0.5;
+  display: flex;
+  justify-content: space-around;
+}
+
+.footer-social a img {
+  width: 30px; /* Tamanho dos ícones das redes sociais */
+  transition: transform 0.3s ease;
+}
+
+.footer-social a img:hover {
+  transform: scale(1.1); /* Aumenta o ícone ao passar o mouse */
+}
+
+.footer-help {
+  flex: 0.5;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.help-btn {
+  background-color: #00bfff; /* Azul do botão de interrogação */
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.help-btn:hover {
+  transform: scale(1.1); /* Aumenta o tamanho do botão ligeiramente ao passar o mouse */
+}
+
+  
+  

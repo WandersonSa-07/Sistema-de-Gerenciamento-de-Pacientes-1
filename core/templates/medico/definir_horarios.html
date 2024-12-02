@@ -1,0 +1,14 @@
+<h1>Definir Horários Disponíveis</h1>
+<form method="post">
+    {% csrf_token %}
+    <label for="data_horario">Data e Hora:</label>
+    <input type="datetime-local" id="data_horario" name="data_horario" required>
+    <button type="submit">Adicionar Horário</button>
+</form>
+
+<h2>Horários Disponíveis</h2>
+<ul>
+    {% for horario in horarios %}
+        <li>{{ horario.data_horario }}</li>
+    {% endfor %}
+</ul>

@@ -61,27 +61,57 @@ def cadastro_especialidadeView(request):
 
    return render(request,'atendente/cadastro_especialidade.html', context=context)
 
-def mostrar_fila_espera(request):
-   if str(request.method) == 'POST':
-      fila_espera_form = FilaEsperaForm(request.POST)
+# def mostrar_fila_espera(request):
+#    if str(request.method) == 'POST':
+#       fila_espera_form = FilaEsperaForm(request.POST)
       
-      if fila_espera_form.is_valid():
-         fila_espera = fila_espera_form.save(commit=False)
-         fila_espera.save()
+#       if fila_espera_form.is_valid():
+#          fila_espera = fila_espera_form.save(commit=False)
+#          fila_espera.save()
 
-         messages.success(request, 'Inserido na fila.')
-         return redirect('atendente_fila_espera')
-      else:
-         messages.error(request, 'Erro ao inserir na fila de espera.')
+#          messages.success(request, 'Inserido na fila.')
+#          return redirect('atendente_fila_espera')
+#       else:
+#          messages.error(request, 'Erro ao inserir na fila de espera.')
   
-   else:
-      fila_espera_form = FilaEsperaForm()
-   medicos = Medico.objects.all()
-   contexto = []
-   for medico in medicos:
-      fila = FilaEspera.objects.filter(medico=medico, estado="Waiting").order_by("created_at")
-      contexto.append({"medico": medico, "fila": fila})
-   return render(request, 'atendente/filaEspera.html', {'contexto': contexto, 'fila_espera_form':fila_espera_form}) 
+#    else:
+#       fila_espera_form = FilaEsperaForm()
+#    medicos = Medico.objects.all()
+#    contexto = []
+#    for medico in medicos:
+#       fila = FilaEspera.objects.filter(medico=medico, estado="Waiting").order_by("created_at")
+#       contexto.append({"medico": medico, "fila": fila})
+#    return render(request, 'atendente/filaEspera.html', {'contexto': contexto, 'fila_espera_form':fila_espera_form}) 
+
+def mostrar_fila_espera(request):
+    if request.method == 'POST':
+        fila_espera_form = FilaEsperaForm(request.POST)
+
+        if fila_espera_form.is_valid():
+            fila_espera = fila_espera_form.save(commit=False)
+            fila_espera.medico = fila_espera.consulta.medico
+            fila_espera.paciente = fila_espera.consulta.paciente
+            fila_espera.save()
+            messages.success(request, 'Inserido na fila.')
+            return redirect('atendente_fila_espera')
+        else:
+            messages.error(request, 'Erro ao inserir na fila de espera.')
+
+    else:
+        fila_espera_form = FilaEsperaForm()
+
+    # Preparar contexto com médicos e filas existentes
+    medicos = Medico.objects.all()
+    contexto = []
+    for medico in medicos:
+        fila = FilaEspera.objects.filter(medico=medico, estado="Waiting").order_by("created_at")
+        contexto.append({"medico": medico, "fila": fila})
+
+
+    return render(request, 'atendente/filaEspera.html', {
+        'contexto': contexto,
+        'fila_espera_form': fila_espera_form,
+    })
 
 
 def inserir_paciente(request):
@@ -145,3 +175,18 @@ def ver_relatorio(request):
         'medicos_com_dados': medicos_dados,
     })
     
+# def marcar_consulta(request):
+#     if request.method == "GET":
+#         horarios_disponiveis = HorarioDisponivel.objects.all().select_related('medico', 'medico__especialidade')
+#         return render(request, "paciente/marcar_consulta.html", {"horarios_disponiveis": horarios_disponiveis})
+
+#     elif request.method == "POST":
+#         horario_id = request.POST.get("horario")
+
+#         horario = HorarioDisponivel.objects.get(id=horario_id)
+#         medico = horario.medico
+
+#         # Criar a consulta
+#         Consulta.objects.create(paciente=request.user.paciente, medico=medico, horario=horario)
+#         horario.delete()  # Remove o horário disponível já marcado
+#         return redirect("marcar_consulta")

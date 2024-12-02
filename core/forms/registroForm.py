@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from core.models import Paciente, Usuario, Atendente, Medico, Especialidade, FilaEspera, FichaMedica
+from core.models import Paciente, Usuario, Atendente, Medico, Especialidade, FilaEspera, FichaMedica, Consulta
 
 class PacienteForm(forms.ModelForm):
     class Meta:
@@ -66,12 +66,20 @@ class EspecialidadeForm(forms.ModelForm):
 class FilaEsperaForm(forms.ModelForm):
     class Meta:
         model = FilaEspera
-        fields = ['medico', 'paciente', 'estado']
+        fields = ['consulta', 'estado']
         widgets = {
-            'medico': forms.Select(attrs={'class': 'form-control'}),
-            'paciente': forms.Select(attrs={'class': 'form-control'}),
+            'consulta': forms.Select(attrs={'class': 'form-control'}),
+            #'medico': forms.Select(attrs={'class': 'form-control'}),
+            #'paciente': forms.Select(attrs={'class': 'form-control'}),
             'estado': forms.Select(choices=[('Waiting', 'Em espera'), ('Cancelled', 'Cancelado')], attrs={'class': 'form-control'}),
         }
+
+    def init(self, args, **kwargs):
+        super(FilaEsperaForm, self).init(args, **kwargs)
+
+        # Definir queryset para 'consulta' no formulário, exibindo consultas que não estão em uma fila de espera
+        self.fields['consulta'].queryset = Consulta.objects.filter(filaespera__isnull=True)
+
     
 class FichaMedicaForm(forms.Form):
     especialidade = forms.ModelChoiceField(
@@ -87,15 +95,6 @@ class FichaMedicaForm(forms.Form):
 
 
 class Funcionalidades_de_ConsultaForm(forms.Form):  
-    HORARIO = (
-          ("07:30 - 08:00", "07:00 - 07:30"),
-          ("07:30 - 08:00", "07:30 - 08:00"),
-          ("08:00 - 08:30", "08:00 - 08:30")
-     )
-    
-    horario = forms.ChoiceField(choices=HORARIO)
-    data = forms.DateField()
-    
     sintomas_apresentados = forms.CharField(max_length=500)
 
     remedio = forms.CharField(max_length=50)

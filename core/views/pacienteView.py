@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.shortcuts import redirect, render
 from core.forms.registroForm import PacienteForm, UsuarioPaciente, FichaMedicaForm
-from core.models import FichaMedica
+from core.models import FichaMedica, Especialidade, Consulta, HorarioDisponivel, Medico
 
 def pacienteRegistro(request):
     if str(request.method) == 'POST':
@@ -67,3 +67,37 @@ def cadastrar_ficha_medica(request):
    }
 
    return render(request,'paciente/ficha_medica.html', context=context)
+
+# def marcar_consulta(request):
+#     especialidades = Especialidade.objects.all()
+
+#     if request.method == "POST":
+#         especialidade_id = request.POST.get("especialidade")
+#         medico_id = request.POST.get("medico")
+#         horario_id = request.POST.get("horario")
+
+#         especialidade = Especialidade.objects.get(id=especialidade_id)
+#         medico = Medico.objects.get(id=medico_id)
+#         horario = HorarioDisponivel.objects.get(id=horario_id)
+
+#         # Criar a consulta e marcar o horário como indisponível
+#         Consulta.objects.create(paciente=request.user, medico=medico, horario=horario)
+#         horario.delete()  # Remove o horário disponível já marcado
+#         return redirect("marcar_consulta")
+
+#     return render(request, "paciente/marcar_consulta.html", {"especialidades": especialidades})
+
+def marcar_consulta(request):
+    if request.method == "GET":
+        horarios_disponiveis = HorarioDisponivel.objects.all().select_related('medico', 'medico__especialidade')
+        return render(request, "paciente/marcar_consulta.html", {"horarios_disponiveis": horarios_disponiveis})
+
+    elif request.method == "POST":
+        horario_id = request.POST.get("horario")
+
+        horario = HorarioDisponivel.objects.get(id=horario_id)
+        medico = horario.medico
+
+        # Criar a consulta
+        Consulta.objects.create(paciente=request.user.paciente, medico=medico, horario=horario)
+        return redirect("marcar_consulta")

@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from core.forms.registroForm import MedicoForm, UsuarioMedico, Funcionalidades_de_ConsultaForm
-from core.models import FilaEspera, Medico, Paciente, Consulta, ReceitaMedica, FichaMedica
+from core.models import FilaEspera, Medico, Paciente, Consulta, ReceitaMedica, FichaMedica, HorarioDisponivel
 from django.http import HttpResponse
+from datetime import datetime
+from django.utils.timezone import now, make_aware, get_current_timezone
 
 def cadastro_MedicoView(request):
    if str(request.method) == 'POST':
@@ -61,26 +63,17 @@ def realizar_consulta(request):
 
 
       if funcionalidades_consulta.is_valid():
-         horario = funcionalidades_consulta.cleaned_data["horario"]
-         data = funcionalidades_consulta.cleaned_data["data"]
          sintomas_apresentados = funcionalidades_consulta.cleaned_data["sintomas_apresentados"]
          remedio = funcionalidades_consulta.cleaned_data["remedio"]
          dosagem = funcionalidades_consulta.cleaned_data["dosagem"]
          qtd_de_dias  = funcionalidades_consulta.cleaned_data["qtd_de_dias"]
          qtd_por_dia  = funcionalidades_consulta.cleaned_data["qtd_por_dia"]
 
-         Consulta.objects.create(
-            medico=medico,
-            data=data,
-            horario=horario,
-            paciente=paciente,
-            sintomas_apresentados=sintomas_apresentados
-            )
-
-            # Criar Ficha Médica
+         # Criar Receita médica
          ReceitaMedica.objects.create(
             medico=medico,
             paciente=paciente,
+            sintomas_apresentados=sintomas_apresentados,
             remedio=remedio,
             dosagem=dosagem,
             qtd_de_dias=qtd_de_dias,
@@ -90,7 +83,7 @@ def realizar_consulta(request):
 
             # Alterar estado do Paciente
          fila.estado = "Attended"
-         #fila.horario_chamado = data
+         fila.horario_chamado = now()
          fila.save()
          
          
@@ -102,10 +95,28 @@ def realizar_consulta(request):
       funcionalidades_consulta = Funcionalidades_de_ConsultaForm()
 
    ficha_medica =  FichaMedica.objects.filter(paciente=paciente).first()
+   receitas = ReceitaMedica.objects.filter(paciente=paciente)
 
    context = {
       'funcionalidades_consulta': funcionalidades_consulta,
-      'ficha_medica': ficha_medica
+      'ficha_medica': ficha_medica,
+      'receitas': receitas
    }
 
    return render(request,'medico/funcionalidades_consulta.html', context=context)
+
+def definir_horarios(request):
+    medico = Medico.objects.get(usuario=request.user)
+
+    if request.method == "POST":
+        data_horario = request.POST.get("data_horario")
+        # Converter para datetime
+        data_horario = datetime.strptime(data_horario, "%Y-%m-%dT%H:%M")
+        #data_horario = make_aware(data_horario, get_current_timezone())
+
+        if data_horario >= now():
+            HorarioDisponivel.objects.create(medico=medico, data_horario=data_horario)
+            return redirect("medico_definir_horario")
+
+    horarios = HorarioDisponivel.objects.filter(medico=medico)
+    return render(request, "medico/definir_horarios.html", {"horarios": horarios})

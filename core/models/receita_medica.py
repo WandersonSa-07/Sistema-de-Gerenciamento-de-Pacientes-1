@@ -1,6 +1,7 @@
 from core.models import *
 
 class ReceitaMedica(models.Model):
+    sintomas_apresentados = models.TextField(max_length=500)
     remedio = models.CharField(max_length=50)
     dosagem = models.CharField(max_length=10)
     qtd_de_dias = models.CharField(max_length=10)

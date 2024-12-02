@@ -16,17 +16,15 @@
             <thead>
                 <tr>
                     <th>Paciente</th>
-                    <th>Data marcada</th>
-                    <th>Horário marcado</th>
-                    <th>Horário do atendimento</th>
+                    <th>Data e horários marcados</th>
+                    <th>Data e horário do atendimento</th>
                 </tr>
             </thead>
             <tbody>
                 {% for item in medico_dados.consultas_e_fila %}
                     <tr>
                         <td>{{ item.consulta.paciente.usuario.first_name }} {{ item.consulta.paciente.usuario.last_name }}</td>  <!-- Nome do paciente -->
-                        <td>{{ item.consulta.data }}</td>  <!-- Formata a data -->
-                        <td>{{ item.consulta.horario }}</td>  <!-- Formata o horário -->
+                        <td>{{ item.consulta.horario.data_horario }}</td>  <!-- Formata a data -->
                         <td>
                             {% if item.updated_at_fila %}
                                 {{ item.updated_at_fila|date:"d/m/Y H:i" }}

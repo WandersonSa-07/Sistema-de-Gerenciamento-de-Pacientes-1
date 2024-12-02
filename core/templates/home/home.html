@@ -8,7 +8,149 @@
 {% endblock %}
 
 {% block content %}
-<h1>Página inicial</h1>
+<header>
+    <img src="{% static 'img/logocuidarmais.png' %}" alt="Logo Clínica Cuidar+" class="logo">
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Estrutura</a>
+      <a href="#">Convênios</a>
+      <a href="#">Especialidades</a>   
+      <a href="#">Notícias</a>
+      <a href="#">Contato</a> 
+    </nav>
+  </header>
+  
+
+<main>
+<section class="hero">
+    <div class="access-cards">
+      <div class="card">
+        <h3>Portal do Paciente</h3>
+        <img src="{% static 'img/id-card.png' %}" alt="Ícone do Portal do Paciente">
+        <a class="access-btn" href="{% url 'login' %}">Acessar →</a>
+      </div>
+      <div class="card">
+        <h3>Acesso Médico</h3>
+        <img src="{% static 'img/doctor.png' %}" alt="Ícone do Acesso Médico">
+        <a class="access-btn" href="{% url 'login' %}">Acessar →</a>
+      </div>
+      <div class="card">
+        <h3>Atendente</h3>
+        <img src="{% static 'img/diary.png' %}" alt="Ícone do Login Atendente">
+        <a class="access-btn" href="{% url 'login' %}">Acessar →</a>
+
+      </div>
+    </div>
+</section>
+  
+<section class="sobre">
+  <div class="sobre-1">
+      <div class="texto-1">
+          <h1>Sobre nós:</h1>
+          <p>A clínica Cuidar+ é parte do Grupo Saúde Integral, que desde 1980 atua no setor de saúde em todo o estado, proporcionando  atendimento de qualidade e realizando procedimentos de alta complexidade. A instituição tem se consolidado como referência em serviços hospitalares, sempre com foco no bem-estar dos pacientes.</p>
+      </div>
+      <div class="imagem-1">
+          <img src="{% static 'img/sobre1.png' %}" alt="Sobre nós">
+      </div>
+  </div>
+</section>
+
+<section class="sobre2">
+<div class="sobre-2">
+  <div class="imagem-2">
+    <img src="{% static 'img/sobre2.png' %}" alt="Imagem ilustrativa">
+  </div>
+    <div class="texto-2">
+        <ul class="topicos">
+            <li>
+                <img src="{% static 'img/icone1.png' %}" alt="Ícone 1">
+                <p>Profissionais altamente qualificados em diversas áreas da saúde.</p>
+            </li>
+            <li>
+                <img src="{% static 'img/icone2.png' %}" alt="Ícone 2">
+                <p>Atendimento humanizado e focado no bem-estar dos pacientes.</p>
+            </li>
+            <li>
+                <img src="{% static 'img/icone3.png' %}" alt="Ícone 3">
+                <p>Estrutura moderna e equipada para atender suas necessidades.</p>
+            </li>
+            <a href="#" class="access-topico">Conheça-nos</a>
+        </ul>
+    </div>
+</div>
+</section>
+
+
+<section class="especialidades">
+<h1>Especialidades Mais Procuradas</h1>
+<p>A clínica Cuidar+ conta com mais de 50
+especialidades médicas para te atender. 
+Conheça algumas das especialidades 
+mais procuradas.</p>
+<div class="especialidades-container">
+<div class="especialidade-imagem">
+  <img src="{% static 'img/especialidades1.png' %}" alt="Imagem ilustrativa">
+</div>
+<div class="especialidades-lista">
+  <div class="especialidade-card">Cardiologia</div>
+  <div class="especialidade-card">Dermatologia</div>
+  <div class="especialidade-card">Ginecologia</div>
+  <div class="especialidade-card">Neurologia</div>
+  <div class="especialidade-card">Ortopedia</div>
+  <div class="especialidade-card">Pediatria</div>
+  <div class="especialidade-card">Cirurgia Geral</div>
+  <div class="especialidade-card">Cirurgia Plástica</div>
+  <div class="especialidade-card">Psicologia</div>
+  <div class="especialidade-card">Oftalmologia</div>
+</div>
+</div>
+</section>
+
+<section class="convenio">
+<div class="covenio-1">
+<div class="convenio-card">
+<h3>Convênios</h3>
+<img src="{% static 'img/convenio.png' %}" alt="Ícone do convenio">
+<p>A clínica Cuidar+ atende uma grande 
+  quantidade de convênios médicos, 
+  possibilitando um melhor atendimento
+   a todos.</p>
+<a href="#" class="convenio-btn">Saiba mais</a>
+</div>
+<div class="convenio-card">
+<h3>Ouvidoria</h3>
+<img src="{% static 'img/ouvidoria.png' %}" alt="Ícone ouvidoria">
+<p>   Este o seu canal de comunicação 
+  direta com a empresa para o registro
+   de reclamações, sugestões e elogios.</p>
+<a href="#" class="convenio-btn">Entre em contato</a>
+</div>
+</div>
+</section>
+
+</main>
+
+<footer class="footer">
+<div class="footer-content">
+  <!-- Logo e Endereço -->
+  <div class="footer-logo-info">
+    <img src="{% static 'img/logocuidarmais.png' %}" alt="Logo Cuidar+ Clínica" class="footer-logo">
+  </div>
+
+  <!-- Contato -->
+  <div class="footer-contact">
+    <p><img src="{% static 'img/location.png' %}" alt="">Av. Alberto Lamego, 2000 - Parque California, Campos dos Goytacazes - RJ, 28013-602</p>
+    <p><img src="{% static 'img/telephone.png' %}" alt="Ícone Localização"> (22) 2739-7186</p>
+    <p><img src="{% static 'img/mail.png' %}" alt="Ícone Email"> contato@cuidarmais_gmail.com</p>
+  </div>
+
+  <!-- Botão de Ajuda -->
+  <div class="footer-help">
+    <a href="#" class="help-btn">?</a>
+  </div>
+</div>
+</footer>
+
 {% endblock %}
 
 {% block script %}

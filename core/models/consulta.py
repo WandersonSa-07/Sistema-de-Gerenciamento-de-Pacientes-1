@@ -1,19 +1,13 @@
 from core.models import *
 
-class Consulta(models.Model):  
-    HORARIO = (
-          ("1", "07:00 - 07:30"),
-          ("2", "07:30 - 08:00"),
-          ("3", "08:00 - 08:30")
-     )
-    
-    horario = models.CharField(max_length=20, choices=HORARIO)
-    data = models.DateField()
-    sintomas_apresentados = models.TextField(max_length=500)
+class Consulta(models.Model):   
+    horario = models.OneToOneField(HorarioDisponivel, on_delete=models.CASCADE)
+    #data = models.DateField()
     medico = models.ForeignKey(Medico, on_delete=models.CASCADE)
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
     
     def __str__(self) :
-        return self.horario
+        return str(self.medico.especialidade.nome) + " - Dr." + str(self.medico.usuario.last_name) + " - " + str(self.horario.data_horario.strftime('%d/%m/%Y %H:%M'))
+        
 
     
